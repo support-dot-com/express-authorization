@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Express Authorization Example - Home</title>
+  </head>
+  <body>
+    <h1>Express Authorization Example - Home</h1>
+
+    <p>
+      This express website serves as an example of the "express-authorization" module.
+      "express-authorization" is an express/connect middleware module for enforcing an
+      Apache Shiro inspired authorization system.
+    </p>
+
+    <p>
+      The <a href="assert">/assert</a> page is only available to users that have the "noun:verb" permission.
+      "express-authorization" is used to enforce this rule.  Follow the links below to
+      control your authentication state and attempt to visit the <a href="assert">/assert</a> page.
+    </p>
+
+    <% if (!authenticated) { %>
+      <a href="login">Login</a>
+    <% } else { %>
+      <a href="logout">Logout</a>
+    <% } %>
+
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Express Authorization Example - Login</title>
+</head>
+<body>
+<h1>Express Authorization Example - Login</h1>
+
+<p>
+  This express website serves as an example of the "express-authorization" module.
+  "express-authorization" is an express/connect middleware module for enforcing an
+  Apache Shiro inspired authorization system.
+</p>
+
+<p>
+  The <a href="assert">/assert</a> page is only available to users that have the "noun:verb" permission.
+  "express-authorization" is used to enforce this rule.  Follow the links below to
+  control your authentication state and attempt to visit the <a href="assert">/assert</a> page.
+</p>
+
+<form method="POST" action="/login">
+  <div>
+    <label>Username</label>
+    <input name="username" value=""/>
+  </div>
+  <div>
+    <label>Password</label>
+    <input name="password" type="password"/>
+  </div>
+  <input type="submit" value="Login" />
+</form>
+
+</body>
+</html>
