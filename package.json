@@ -1,6 +1,6 @@
 {
   "name": "express-authorization",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An authorization system for connect and express applications inspired by Apache's Shiro project.",
   "main": "lib",
   "scripts": {
