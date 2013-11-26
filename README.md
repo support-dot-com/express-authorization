@@ -9,8 +9,11 @@ var app = express();
 // Consider an authenticated user in the express session:
 // req.session.user.permissions = ["restricted:*"]
 
-app.get('/restricted', authorization.ensureRequest.isPermitted("restricted:view"), function(req, res) {
-});
+app.get('/restricted',
+  authorization.ensureRequest.isPermitted("restricted:view"),
+  function(req, res) {
+    ...
+  });
 ```
 
 ## Installation
@@ -55,8 +58,12 @@ app.get('/restricted', authorization.ensureRequest.isPermitted("restricted:view"
   queries to confirm permitted permissions.
 
 ```js
-authorization.considerSubject(user).isPermitted("express:coding")
-authorization.considerPermissions("source:edit", "express:*").isPermitted("express:coding")
+authorization
+  .considerSubject(user)
+  .isPermitted("express:coding")
+authorization
+  .considerPermissions("source:edit", "express:*")
+  .isPermitted("express:coding")
 ```
 
 #### From subject or permission list -> claim -> isPermitted
@@ -82,9 +89,9 @@ authorization.considerSubject | authorization.considerPermissions -> claim
   To consider alternative permission sources, __withSubject__ or __withPermissions__ callbacks (asynchronous or immediate) are used.
   ```js
   authorization.ensureRequest
-  .withPermissions(function (req, res, done) { done(["identity:*"]); })
-  .isPermitted("identity:edit");
-   ```
+    .withPermissions(function (req, res, done) { done(["identity:*"]); })
+    .isPermitted("identity:edit");
+  ```
 
   __ensureRequest__ redirects to __/login__ by default when a request is denied.
   __redirectTo__ can be used to specify an alternate redirect url.
