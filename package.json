@@ -1,6 +1,6 @@
 {
   "name": "express-authorization",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An authorization system for connect and express applications inspired by Apache's Shiro project.",
   "main": "lib",
   "scripts": {
@@ -19,7 +19,8 @@
   },
   "author": "Support.com, Inc.",
   "contributors": [
-    "Charles Eads"
+    "Charles Eads",
+    "Dan Glass"
   ],
   "license": "MIT"
 }
