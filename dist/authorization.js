@@ -19,7 +19,9 @@ function considerPermissions(/* permission ... or [permission, ....] */) {
 function coalescePermissions(/* permission ... or [permission, ...] */) {
   var permissions = [], i;
   for (i=0; i < arguments.length; i++) {
-    permissions = permissions.concat(arguments[i]);
+    if (arguments[i] != null && arguments[i] != undefined){
+      permissions = permissions.concat(arguments[i]);
+    }
   }
   return permissions;
 }
