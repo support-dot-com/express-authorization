@@ -63,9 +63,37 @@ describe('considerPermissions/isPermitted', function() {
     assert.equal(authorization.considerPermissions(permissions).isPermitted(['system:shutdown', 'session:random']), false);
   });
 
+  it ('Works with wildcard permissions extending to a noun:verb:subject structure and beyond.', function() {
+    assert.equal(authorization.considerPermissions('*').isPermitted('l1:l2:l3:l4:l5'), true);
+    assert.equal(authorization.considerPermissions('*').isPermitted('l1'), true);
+    assert.equal(authorization.considerPermissions('*:*').isPermitted('l1:l2:l3:l4:l5'), true);
+    assert.equal(authorization.considerPermissions('*:*').isPermitted('l1:l2'), true);
+    assert.equal(authorization.considerPermissions('*:*').isPermitted('l1'), true);
+    assert.equal(authorization.considerPermissions('*:*:*').isPermitted('l1:l2:l3:l4:l5'), true);
+    assert.equal(authorization.considerPermissions('*:*:*').isPermitted('l1:l2:l3'), true);
+    assert.equal(authorization.considerPermissions('*:*:*').isPermitted('l1:l2'), true);
+    assert.equal(authorization.considerPermissions('*:*:*').isPermitted('l1'), true);
+  });
+
   it ('Works with fine grained permissions extending to a noun:verb:subject structure and beyond.', function() {
     assert.equal(authorization.considerPermissions('l1:l2:*').isPermitted('l1:l2:l3'), true);
-    assert.equal(authorization.considerPermissions('l1:l2:*').isPermitted('l1:l2'), false);
+    assert.equal(authorization.considerPermissions('l1:l2:*').isPermitted('l1:l2'), true);
     assert.equal(authorization.considerPermissions('l1:l2:*:*:*').isPermitted('l1:l2:l3:l4:l5'), true);
+    assert.equal(authorization.considerPermissions('l1').isPermitted('l1:l2:l3'), true);
+    assert.equal(authorization.considerPermissions('l1:l2').isPermitted('l1:l2:l3'), true);
+    assert.equal(authorization.considerPermissions('l1:l2').isPermitted('l1'), false);
+    assert.equal(authorization.considerPermissions('l1:a,b,c:l3').isPermitted('l1:a:l3'), true);
+    assert.equal(authorization.considerPermissions('l1:a,b,c:d,e,f').isPermitted('l1:a:l3'), false);
+    assert.equal(authorization.considerPermissions('l1:a,b,c:d,e,f').isPermitted('l1:a:f'), true);
+    assert.equal(authorization.considerPermissions('l1:*:l3').isPermitted('l1:l2:l3'), true);
+    assert.equal(authorization.considerPermissions('l1:*:l3').isPermitted('l1:l2:error'), false);
+    assert.equal(authorization.considerPermissions('l1:*:l3').isPermitted('l1:l2'), false);
+    assert.equal(authorization.considerPermissions('*:l2').isPermitted('l1:l2'), true);
+    assert.equal(authorization.considerPermissions('*:l2').isPermitted('l1:error'), false);
+    assert.equal(authorization.considerPermissions('*:l2:l3').isPermitted('l1:l2:l3'), true);
+    assert.equal(authorization.considerPermissions('*:l2:l3').isPermitted('l1:l2:l3:l4'), true);
+    assert.equal(authorization.considerPermissions('*:*:l3').isPermitted('l1:l2:l3'), true);
+    assert.equal(authorization.considerPermissions('*:*:l3').isPermitted('l1:l2:l3:l4'), true);
+    assert.equal(authorization.considerPermissions('*:*:l3').isPermitted('l1:l2:error:l4'), false);
   });
 });
