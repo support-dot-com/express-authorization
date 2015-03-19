@@ -26,11 +26,23 @@ describe('considerSubject/isPermitted', function() {
 describe('considerPermissions/isPermitted', function() {
   it ('Denies with no permissions.', function() {
     assert.equal(authorization.considerPermissions().isPermitted(), false);
+    assert.equal(authorization.considerPermissions(undefined).isPermitted(), false);
+    assert.equal(authorization.considerPermissions(null).isPermitted(), false);
     assert.equal(authorization.considerPermissions().isPermitted('noun:verb'), false);
+    assert.equal(authorization.considerPermissions(undefined).isPermitted('noun:verb'), false);
+    assert.equal(authorization.considerPermissions(null).isPermitted('noun:verb'), false);
   });
 
   it ('Denies when called and no permissions are declared permitted.', function() {
     assert.equal(authorization.considerPermissions('noun:verb').isPermitted(), false);
+  });
+
+  it ('Denies when called and no permissions are requested.', function() {
+    assert.equal(authorization.considerPermissions('noun:verb').isPermitted(null), false);
+  });
+
+  it ('Denies when called and undefined permissions are requested.', function() {
+    assert.equal(authorization.considerPermissions('noun:verb').isPermitted(undefined), false);
   });
 
   it ('Denies when permissions do not match.', function() {
