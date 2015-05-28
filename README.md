@@ -51,11 +51,11 @@ app.get('/restricted',
 ### Permission Query
 
   Permissions statements are strings that can be specified in parameter lists that may include arrays of composited permissions.
-  A subject, usually a user, is expected to be represented by an object with a permissions property refering to either
+  A subject, usually a user, is expected to be represented by an object with a permissions property referring to either
   a single permission or an array of permissions.
 
   In the permission query API, a permission source is placed under consideration and compiled into a claim that is
-  queries to confirm permitted permissions.
+  queried to confirm permitted permissions.
 
 ```js
 authorization
@@ -95,7 +95,7 @@ authorization.considerSubject | authorization.considerPermissions -> claim
 
   __ensureRequest__ redirects to __/login__ by default when a request is denied.
   __redirectTo__ can be used to specify an alternate redirect url.
-  __onDenied__ can be used to prived a custom response function.
+  __onDenied__ can be used to provide a custom response function.
 
   All of these options (__withSubject__, __withPermissions__, __redirectTo__, and __onDenied__)
   can be set either through chained API calls, or on the __ensureRequest.options__ object.
